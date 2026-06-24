@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QuadCorp — Services & Pricing Packages 2026</title>
+<style>
+  :root {
+    --dark: #0d0d2b;
+    --mid: #1a1a4e;
+    --accent: #00c8ff;
+    --gold: #ffd700;
+    --white: #ffffff;
+    --row-alt: #e8eeff;
+    --row-even: #f7f9ff;
+    --border: #b0b8d8;
+    --text: #1a1a2e;
+    --green: #006020;
+    --blue: #004080;
+    --amber: #806600;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f0f2f8;
+    color: var(--text);
+    font-size: 13px;
+  }
+
+  /* ── HEADER ── */
+  .page-header {
+    background: var(--dark);
+    padding: 36px 40px 28px;
+    text-align: center;
+    border-bottom: 3px solid var(--accent);
+  }
+  .page-header h1 {
+    font-size: 32px;
+    color: var(--accent);
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  .page-header p {
+    color: var(--gold);
+    font-size: 13px;
+    font-style: italic;
+  }
+
+  /* ── NAV TABS ── */
+  .tab-nav {
+    display: flex;
+    background: var(--mid);
+    border-bottom: 2px solid var(--accent);
+    flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 12px 22px;
+    color: #aac4ff;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-right: 1px solid rgba(255,255,255,0.1);
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .tab-btn:hover { background: rgba(0,200,255,0.1); color: var(--accent); }
+  .tab-btn.active { background: var(--dark); color: var(--accent); border-bottom: 2px solid var(--accent); }
+
+  /* ── CONTENT ── */
+  .tab-content { display: none; padding: 32px 36px; }
+  .tab-content.active { display: block; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    background: var(--mid);
+    color: var(--white);
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 700;
+    border-left: 4px solid var(--accent);
+    margin: 28px 0 0;
+    border-radius: 2px;
+  }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; margin-top: 0; }
+  thead tr { background: var(--dark); }
+  thead th {
+    color: var(--white);
+    padding: 10px 12px;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+  thead th.center { text-align: center; }
+  thead th.right { text-align: right; }
+  tbody tr:nth-child(odd)  { background: var(--row-alt); }
+  tbody tr:nth-child(even) { background: var(--row-even); }
+  tbody tr:hover { background: #dce5ff; }
+  tbody td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    vertical-align: middle;
+    line-height: 1.45;
+  }
+  tbody td.pkg-name {
+    font-weight: 700;
+    color: var(--mid);
+    white-space: nowrap;
+  }
+  tbody td.price {
+    text-align: right;
+    font-weight: 700;
+    color: var(--mid);
+    white-space: nowrap;
+  }
+  tbody td.range { text-align: center; font-size: 11px; color: #555; }
+  tbody td.center { text-align: center; }
+  tbody td.desc { font-size: 12px; color: #333; }
+
+  /* ── PRICE BADGE ── */
+  .price-main {
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--dark);
+  }
+
+  /* ── MONTHLY TIERS ── */
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .tier-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  }
+  .tier-card-header {
+    padding: 18px 20px 14px;
+    text-align: center;
+  }
+  .tier-card-header.essential { background: var(--blue); }
+  .tier-card-header.growth    { background: var(--amber); }
+  .tier-card-header.premium   { background: var(--green); }
+  .tier-card-header h3 { color: #fff; font-size: 18px; margin-bottom: 4px; }
+  .tier-price {
+    font-size: 28px;
+    font-weight: 900;
+    color: #fff;
+    margin: 8px 0 2px;
+  }
+  .tier-price span { font-size: 14px; font-weight: 400; }
+  .tier-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-top: 4px;
+  }
+  .tier-card-body {
+    background: var(--white);
+    padding: 16px 18px;
+  }
+  .tier-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 6px 0;
+    border-bottom: 1px solid #eef0f8;
+    font-size: 12px;
+    color: #333;
+  }
+  .tier-feature:last-child { border-bottom: none; }
+  .tick { color: #22aa44; font-weight: 700; flex-shrink: 0; }
+  .cross { color: #cc3333; font-weight: 700; flex-shrink: 0; }
+  .feat-label { color: #666; font-size: 11px; margin-right: 4px; }
+
+  /* ── ADD-ON TABLE ── */
+  .addon-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .addon-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: box-shadow 0.2s;
+  }
+  .addon-card:hover { box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  .addon-name { font-weight: 700; color: var(--mid); font-size: 13px; }
+  .addon-desc { font-size: 11px; color: #555; line-height: 1.4; }
+  .addon-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+  .addon-price { font-weight: 800; color: var(--dark); font-size: 14px; }
+  .addon-applies { font-size: 10px; color: var(--white); background: var(--mid); padding: 2px 7px; border-radius: 10px; }
+
+  /* ── MONTHLY EXTRAS TABLE ── */
+  .monthly-extras { margin-top: 24px; }
+
+  /* ── NOTE BOX ── */
+  .note-box {
+    background: var(--mid);
+    color: var(--accent);
+    padding: 12px 18px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 24px;
+    border-left: 4px solid var(--gold);
+    line-height: 1.6;
+  }
+
+  /* ── OVERVIEW CARDS ── */
+  .overview-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .ov-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 18px;
+    text-align: center;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  }
+  .ov-icon { font-size: 32px; margin-bottom: 8px; }
+  .ov-title { font-weight: 700; color: var(--mid); font-size: 14px; margin-bottom: 4px; }
+  .ov-sub { font-size: 11px; color: #666; }
+
+  @media print {
+    .tab-nav { display: none; }
+    .tab-content { display: block !important; page-break-before: always; }
+    .tab-content:first-child { page-break-before: auto; }
+    body { background: white; }
+    .tab-content { padding: 16px; }
+  }
+
+  @media (max-width: 768px) {
+    .tiers-grid { grid-template-columns: 1fr; }
+    .addon-grid { grid-template-columns: 1fr; }
+    .tab-content { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>QuadCorp &mdash; Services &amp; Pricing Packages</h1>
+  <p>Effective 2026 &nbsp;|&nbsp; All prices in ZAR (excl. VAT) &nbsp;|&nbsp; Subject to scope confirmation</p>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="showTab('overview')">📋 Overview</button>
+  <button class="tab-btn" onclick="showTab('websites')">🌐 Websites</button>
+  <button class="tab-btn" onclick="showTab('stores')">🛍️ Online Stores</button>
+  <button class="tab-btn" onclick="showTab('apps')">📱 Apps</button>
+  <button class="tab-btn" onclick="showTab('crm')">🤝 CRM / GHL</button>
+  <button class="tab-btn" onclick="showTab('monthly')">📆 Monthly Packages</button>
+  <button class="tab-btn" onclick="showTab('addons')">➕ Add-Ons</button>
+</div>
+
+<!-- ══════════ OVERVIEW ══════════ -->
+<div id="overview" class="tab-content active">
+  <h2 style="color:var(--mid);font-size:20px;margin-bottom:6px;">Welcome to QuadCorp</h2>
+  <p style="color:#555;font-size:13px;max-width:720px;line-height:1.6;">
+    We build websites, online stores, mobile and web apps, CRM systems, and AI-powered solutions.
+    Every project starts with a one-time startup fee. Monthly packages keep everything running, secure, and growing.
+  </p>
+
+  <div class="overview-cards">
+    <div class="ov-card"><div class="ov-icon">🌐</div><div class="ov-title">Websites</div><div class="ov-sub">From R 1,500 startup</div></div>
+    <div class="ov-card"><div class="ov-icon">🛍️</div><div class="ov-title">Online Stores</div><div class="ov-sub">From R 12,000 startup</div></div>
+    <div class="ov-card"><div class="ov-icon">📱</div><div class="ov-title">Apps</div><div class="ov-sub">From R 30,000 startup</div></div>
+    <div class="ov-card"><div class="ov-icon">🤝</div><div class="ov-title">CRM / GHL</div><div class="ov-sub">From R 8,000 startup</div></div>
+    <div class="ov-card"><div class="ov-icon">📆</div><div class="ov-title">Monthly Care</div><div class="ov-sub">From R 300 / month</div></div>
+  </div>
+
+  <div class="note-box">
+    ★ Hosting is required for all packages unless the client opts to self-deploy on their own server.<br>
+    ★ CMS and extra pages are optional add-ons — see the Add-Ons tab.<br>
+    ★ Monthly packages can be added on top of any startup package at any time.<br>
+    ★ All prices are in South African Rand (ZAR), excluding VAT. Final pricing confirmed after scope session.
+  </div>
+</div>
+
+<!-- ══════════ WEBSITES ══════════ -->
+<div id="websites" class="tab-content">
+  <div class="section-title">🌐 Website Packages — One-Time Startup Fee</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Package</th>
+        <th>What's Included</th>
+        <th class="right">Startup Price</th>
+        <th class="center">Price Range</th>
+        <th class="center">Pages</th>
+        <th class="center">Timeline</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="pkg-name">One-Pager Website</td>
+        <td class="desc">Single-page scrolling website, custom design, mobile responsive, contact form or WhatsApp button, basic SEO. Perfect for launching fast. Hosting required.</td>
+        <td class="price"><span class="price-main">R 1,500</span></td>
+        <td class="range">R 1,500 – R 3,000</td>
+        <td class="center">1 page</td>
+        <td class="center">3–5 days</td>
+      </tr>
+      <tr>
+        <td class="pkg-name">Micro Website (1–3 Pages)</td>
+        <td class="desc">Up to 3 pages (e.g. Home, About, Contact), custom design, mobile responsive, contact form, Google Maps, basic SEO. Ideal for small businesses &amp; startups. Hosting required.</td>
+        <td class="price"><span class="price-main">R 3,500</span></td>
+        <td class="range">R 2,500 – R 5,500</td>
+        <td class="center">1–3 pages</td>
+        <td class="center">1–2 weeks</td>
+      </tr>
+      <tr>
+        <td class="pkg-name">Starter Website</td>
+        <td class="desc">5-page website, custom design, mobile responsive, contact form, basic SEO, Google Maps integration. Hosting required.</td>
+        <td class="price"><span class="price-main">R 8,500</span></td>
+        <td class="range">R 6,500 – R 12,000</td>
+        <td class="center">5 pages</td>
+        <td class="center">2–3 weeks</td>
+      </tr>
+      <tr>
+        <td class="pkg-name">Business Website</td>
+        <td class="desc">10-page website, premium design, mobile responsive, advanced contact form, photo gallery, Google Maps, basic SEO. Hosting required.</td>
+        <td class="price"><span class="price-main">R 18,000</span></td>
+        <td class="range">R 15,000 – R 25,000</td>
+        <td class="center">10 pages</td>
+        <td class="center">3–5 weeks</td>
+      </tr>
+      <tr>
+        <td class="pkg-name">Premium Website</td>
+        <td class="desc">15+ pages, fully custom design, CMS included, advanced SEO, animations, blog, multi-language option. Hosting required.</td>
+        <td class="price"><span class="price-main">R 35,000</span></td>
+        <td class="range">R 30,000 – R 55,000</td>
+        <td class="center">15+ pages</td>
+        <td class="center">6–10 weeks</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note-box">All websites include mobile-responsive design, basic on-page SEO, and SSL setup. CMS is an optional add-on (R 5,000). Hosting is required unless client self-deploys.</div>
+</div>
+
+<!-- ══════════ ONLINE STORES ══════════ -->
+<div id="stores" class="tab-content">
+  <div class="section-title">🛍️ Online Store Packages — One-Time Startup Fee</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Package</th>
+        <th>What's Included</th>
+        <th class="right">Startup Price</th>
+        <th class="center">Price Range</th>
+        <th class="center">Scale</th>
+        <th class="center">Timeline</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="pkg-name">Shopify Starter Store</td>
+        <td class="desc">Shopify account setup, theme customisation, up to 50 products, payment gateway (PayFast/Stripe), basic SEO, mobile responsive. Hosting via Shopify.</td>
+        <td class="price"><span class="price-main">R 12,000</span></td>
+        <td class="range">R 9,000 – R 16,000</td>
+        <td class="center">50 products</td>
+        <td class="center">2–3 weeks</td>
+      </tr>
+      <tr>
+        <td class="pkg-name">Shopify Advanced Store</td>
+        <td class="desc">Custom Shopify theme, unlimited products, 3 premium apps, advanced SEO, abandoned cart recovery, analytics dashboard. Hosting via Shopify.</td>
+        <td class="price"><span class="price-main">R 22,000</span></td>
+        <td class="range">R 18,000 – R 30,000</td>
+        <td class="center">Unlimited</td>
+        <td class="center">4–6 weeks</td>
+      </tr>
+      <tr>
+        <td class="pkg-name">Custom E-Commerce Store</td>
+        <td class="desc">Fully bespoke store (non-Shopify), unlimited products, custom design, CMS admin panel, payment gateway, inventory management. Hosting required.</td>
+        <td class="price"><span class="price-main">R 55,000</span></td>
+        <td class="range">R 45,000 – R 80,000</td>
+        <td class="center">Unlimited</td>
+        <td class="center">8–14 weeks</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note-box">Shopify plans include hosting natively via Shopify's platform (Shopify subscription fee applies separately). Custom stores require hosting — see Add-Ons or Monthly Packages.</div>
+</div>
+
+<!-- ══════════ APPS ══════════ -->
+<div id="apps" class="tab-content">
+  <div class="section-title">📱 App Development Packages — One-Time Startup Fee</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Package</th>
+        <th>What's Included</th>
+        <th class="right">Startup Price</th>
+        <th class="center">Price Range</th>
+        <th class="center">Platform</th>
+        <th class="center">Timeline</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="pkg-name">Web App — Starter</td>
+        <td class="desc">User authentication, core custom functionality, responsive design, basic admin panel. Hosting required.</td>
+        <td class="price"><span class="price-main">R 30,000</span></td>
+        <td class="range">R 25,000 – R 45,000</td>
+        <td class="center">Web</td>
+        <td class="center">4–8 weeks</td>
+      </tr>
+      <tr>
+        <td class="pkg-name">Web App — Advanced</td>
+        <td class="desc">Complex business logic, third-party API integrations, advanced admin dashboard, reporting & analytics. Hosting required.</td>
+        <td class="price"><span class="price-main">R 60,000</span></td>
+        <td class="range">R 50,000 – R 90,000</td>
+        <td class="center">Web</td>
+        <td class="center">8–14 weeks</td>
+      </tr>
+      <tr>
+        <td class="pkg-name">Mobile App (iOS & Android)</td>
+        <td class="desc">Cross-platform mobile app (React Native), core features, push notifications, admin panel, app store submission. Hosting required.</td>
+        <td class="price"><span class="price-main">R 80,000</span></td>
+        <td class="range">R 65,000 – R 120,000</td>
+        <td class="center">iOS + Android</td>
+        <td class="center">10–20 weeks</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note-box">App pricing is highly scope-dependent. The ranges above are guidelines — complex features, integrations, or enterprise requirements may fall above the range. A free scoping call is recommended before quoting.</div>
+</div>
+
+<!-- ══════════ CRM ══════════ -->
+<div id="crm" class="tab-content">
+  <div class="section-title">🤝 CRM Platforms (GoHighLevel) — One-Time Startup Fee</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Package</th>
+        <th>What's Included</th>
+        <th class="right">Startup Price</th>
+        <th class="center">Price Range</th>
+        <th class="center">Scale</th>
+        <th class="center">Timeline</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="pkg-name">GHL Starter</td>
+        <td class="desc">GHL account setup, 3 sales pipelines, basic email & SMS automations, contact management, calendar booking, reporting dashboard.</td>
+        <td class="price"><span class="price-main">R 8,000</span></td>
+        <td class="range">R 6,000 – R 12,000</td>
+        <td class="center">Small team</td>
+        <td class="center">1–2 weeks</td>
+      </tr>
+      <tr>
+        <td class="pkg-name">GHL Business</td>
+        <td class="desc">Full GHL setup, unlimited pipelines, advanced workflows & automations, CRM integrations, lead capture forms, custom reporting, team user setup.</td>
+        <td class="price"><span class="price-main">R 18,000</span></td>
+        <td class="range">R 15,000 – R 28,000</td>
+        <td class="center">Growing biz</td>
+        <td class="center">2–4 weeks</td>
+      </tr>
+      <tr>
+        <td class="pkg-name">GHL Enterprise / White Label</td>
+        <td class="desc">White-label GHL setup, full brand customisation, custom domain, unlimited sub-accounts, advanced automations, API integrations, staff training session.</td>
+        <td class="price"><span class="price-main">R 35,000</span></td>
+        <td class="range">R 28,000 – R 55,000</td>
+        <td class="center">Enterprise</td>
+        <td class="center">4–6 weeks</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note-box">GoHighLevel platform subscription is billed separately (R 1,200/month via QuadCorp or directly). GHL Automation Maintenance is available as a monthly add-on.</div>
+</div>
+
+<!-- ══════════ MONTHLY ══════════ -->
+<div id="monthly" class="tab-content">
+  <h2 style="color:var(--mid);font-size:18px;margin-bottom:4px;">Monthly Support &amp; Hosting Packages</h2>
+  <p style="color:#555;font-size:12px;">Choose a tier to keep your digital presence secure, fast, and growing. All tiers include hosting unless client self-deploys.</p>
+
+  <div class="tiers-grid">
+    <!-- ESSENTIAL -->
+    <div class="tier-card">
+      <div class="tier-card-header essential">
+        <h3>🔵 Essential</h3>
+        <div class="tier-price">R 599 <span>/ month</span></div>
+        <div class="tier-tag">Hosting + Security</div>
+      </div>
+      <div class="tier-card-body">
+        <div class="tier-feature"><span class="tick">✓</span><span>Shared cloud hosting (1 website)</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>1 CMS included</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>SSL certificate included</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>24/7 uptime monitoring</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>Monthly backups</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>Security &amp; plugin updates</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span><b>1 hr/month</b> technical support</span></div>
+        <div class="tier-feature"><span class="cross">✗</span><span style="color:#999;">Content updates (text/images)</span></div>
+        <div class="tier-feature"><span class="cross">✗</span><span style="color:#999;">New page development</span></div>
+        <div class="tier-feature"><span class="cross">✗</span><span style="color:#999;">Strategy call</span></div>
+        <div class="tier-feature" style="padding-top:10px;border-top:2px solid #eee;margin-top:4px;">
+          <span style="font-size:11px;color:#666;font-style:italic;">Best for clients who need stable hosting &amp; security</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GROWTH -->
+    <div class="tier-card">
+      <div class="tier-card-header growth">
+        <h3>🟡 Growth</h3>
+        <div class="tier-price">R 1,499 <span>/ month</span></div>
+        <div class="tier-tag">Hosting + Content Care</div>
+      </div>
+      <div class="tier-card-body">
+        <div class="tier-feature"><span class="tick">✓</span><span>Everything in Essential</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>1 CMS included</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span><b>Priority support — 5 hrs/month</b></span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span><b>Unlimited</b> text &amp; image updates</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>Minor layout &amp; copy tweaks</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span><b>Same business-day response</b></span></div>
+        <div class="tier-feature"><span class="cross">✗</span><span style="color:#999;">New page development</span></div>
+        <div class="tier-feature"><span class="cross">✗</span><span style="color:#999;">Strategy call</span></div>
+        <div class="tier-feature" style="padding-top:10px;border-top:2px solid #eee;margin-top:4px;">
+          <span style="font-size:11px;color:#666;font-style:italic;">Best for clients who regularly update content &amp; promotions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOSTING ONLY PACKAGES -->
+  <div class="section-title" style="margin-top:32px;">🖥️ Hosting Only Packages</div>
+  <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:0;">
+    <div class="tier-card">
+      <div class="tier-card-header" style="background:#2d2d6e;">
+        <h3>Hosting Basic</h3>
+        <div class="tier-price">R 300 <span>/ month</span></div>
+        <div class="tier-tag">1 Website — No Support</div>
+      </div>
+      <div class="tier-card-body">
+        <div class="tier-feature"><span class="tick">✓</span><span>Shared cloud hosting for 1 website</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>SSL certificate included</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>24/7 uptime monitoring</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>Monthly backups</span></div>
+        <div class="tier-feature"><span class="cross">✗</span><span style="color:#999;">Technical support</span></div>
+        <div class="tier-feature"><span class="cross">✗</span><span style="color:#999;">Content updates</span></div>
+        <div class="tier-feature" style="padding-top:10px;border-top:2px solid #eee;margin-top:4px;">
+          <span style="font-size:11px;color:#666;font-style:italic;">Best for clients who manage their own site</span>
+        </div>
+      </div>
+    </div>
+    <div class="tier-card">
+      <div class="tier-card-header" style="background:#2d2d6e;">
+        <h3>Hosting + CMS</h3>
+        <div class="tier-price">R 400 <span>/ month</span></div>
+        <div class="tier-tag">1 Website + CMS Access</div>
+      </div>
+      <div class="tier-card-body">
+        <div class="tier-feature"><span class="tick">✓</span><span>Everything in Hosting Basic</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>CMS access for 1 website</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>Update your own text &amp; images anytime</span></div>
+        <div class="tier-feature"><span class="tick">✓</span><span>CMS user account &amp; training session</span></div>
+        <div class="tier-feature"><span class="cross">✗</span><span style="color:#999;">Technical support</span></div>
+        <div class="tier-feature" style="padding-top:10px;border-top:2px solid #eee;margin-top:4px;">
+          <span style="font-size:11px;color:#666;font-style:italic;">Best for clients who want to self-manage content</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="monthly-extras">
+    <div class="section-title" style="margin-top:32px;">🔧 Additional Monthly Options (per service)</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Option</th>
+          <th class="right">Monthly Price</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>All Services</td><td>Hosting Only (no support)</td><td class="price">R 300</td><td class="desc">Shared hosting, 1 website, no support included</td></tr>
+        <tr><td>All Services</td><td>Premium Hosting (VPS)</td><td class="price">R 799</td><td class="desc">Faster resources, ideal for stores &amp; apps</td></tr>
+        <tr><td>All Services</td><td>Extra Support Hours (per hour)</td><td class="price">R 450</td><td class="desc">Billed in 1-hr blocks, beyond your monthly allocation</td></tr>
+        <tr><td>Websites / Stores</td><td>SEO Monitoring &amp; Reporting</td><td class="price">R 1,500</td><td class="desc">Monthly rankings report + optimisation tweaks</td></tr>
+        <tr><td>Online Stores</td><td>E-Commerce Management</td><td class="price">R 2,500</td><td class="desc">Product updates, promotions, order management</td></tr>
+        <tr><td>CRM / GHL</td><td>GHL Platform Subscription (via QuadCorp)</td><td class="price">R 1,200</td><td class="desc">GoHighLevel SaaS fee billed through QuadCorp</td></tr>
+        <tr><td>CRM / GHL</td><td>GHL Automation Maintenance</td><td class="price">R 1,800</td><td class="desc">Keep automations running, updates &amp; tweaks</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════ ADD-ONS ══════════ -->
+<div id="addons" class="tab-content">
+  <h2 style="color:var(--mid);font-size:18px;margin-bottom:4px;">Optional Add-Ons</h2>
+  <p style="color:#555;font-size:12px;margin-bottom:20px;">Can be bundled at startup or added to any existing package at any time. All prices in ZAR, excl. VAT.</p>
+
+  <div class="addon-grid">
+    <div class="addon-card">
+      <div class="addon-name">CMS Integration</div>
+      <div class="addon-desc">Add a content management system so you can update text, images and pages yourself without a developer.</div>
+      <div class="addon-footer"><span class="addon-price">R 5,000</span><span class="addon-applies">Websites &amp; Stores</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Extra Page (per page)</div>
+      <div class="addon-desc">Additional designed &amp; developed page beyond what's included in your package.</div>
+      <div class="addon-footer"><span class="addon-price">R 1,200</span><span class="addon-applies">Websites</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Blog / News Module</div>
+      <div class="addon-desc">Full blog setup with categories, tags, search and RSS feed.</div>
+      <div class="addon-footer"><span class="addon-price">R 3,500</span><span class="addon-applies">Websites</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Hosting Setup &amp; Configuration</div>
+      <div class="addon-desc">Initial server/hosting setup and deployment if the client provides their own hosting.</div>
+      <div class="addon-footer"><span class="addon-price">R 1,500</span><span class="addon-applies">All Services</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Logo Design</div>
+      <div class="addon-desc">Professional logo design — up to 3 concepts, 2 revision rounds, all file formats supplied.</div>
+      <div class="addon-footer"><span class="addon-price">R 3,500</span><span class="addon-applies">All Services</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Brand Identity Pack</div>
+      <div class="addon-desc">Logo + colour palette + typography guide + brand usage document.</div>
+      <div class="addon-footer"><span class="addon-price">R 7,500</span><span class="addon-applies">All Services</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Full SEO Audit &amp; Setup</div>
+      <div class="addon-desc">Technical SEO audit, on-page optimisation, sitemap, schema markup, Google Search Console setup.</div>
+      <div class="addon-footer"><span class="addon-price">R 4,500</span><span class="addon-applies">Websites &amp; Stores</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Google Analytics 4 + GTM Setup</div>
+      <div class="addon-desc">Full GA4 + Google Tag Manager setup with event tracking and conversion goals.</div>
+      <div class="addon-footer"><span class="addon-price">R 2,500</span><span class="addon-applies">Sites, Stores, Apps</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Payment Gateway Integration</div>
+      <div class="addon-desc">PayFast, Peach Payments, Stripe or PayPal integration.</div>
+      <div class="addon-footer"><span class="addon-price">R 3,000</span><span class="addon-applies">Websites &amp; Apps</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">WhatsApp Chat Widget</div>
+      <div class="addon-desc">WhatsApp Business chat button embedded on your website.</div>
+      <div class="addon-footer"><span class="addon-price">R 800</span><span class="addon-applies">Websites &amp; Stores</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Live Chat Widget Setup</div>
+      <div class="addon-desc">Setup of a live chat tool (Intercom, Crisp, Tidio etc.) on your site.</div>
+      <div class="addon-footer"><span class="addon-price">R 1,200</span><span class="addon-applies">Websites &amp; Stores</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Multi-Language Setup (per language)</div>
+      <div class="addon-desc">Add an additional language with translation integration (e.g. Afrikaans, Zulu, French).</div>
+      <div class="addon-footer"><span class="addon-price">R 4,000</span><span class="addon-applies">Websites</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Custom GHL Workflow / Automation</div>
+      <div class="addon-desc">Design and build one complex automation or workflow in GoHighLevel.</div>
+      <div class="addon-footer"><span class="addon-price">R 3,500</span><span class="addon-applies">CRM / GHL</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">AI Chatbot Add-On</div>
+      <div class="addon-desc">Claude-powered AI chatbot for your website or app — answers FAQs, captures leads, qualifies prospects.</div>
+      <div class="addon-footer"><span class="addon-price">R 8,000</span><span class="addon-applies">Websites &amp; Apps</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Third-Party API Integration</div>
+      <div class="addon-desc">Connect your site/app to an external API (booking systems, ERPs, accounting tools, etc.).</div>
+      <div class="addon-footer"><span class="addon-price">R 5,000</span><span class="addon-applies">All Services</span></div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">E-Commerce Product Upload (per 50 products)</div>
+      <div class="addon-desc">Manual product data entry — name, description, price, images, categories.</div>
+      <div class="addon-footer"><span class="addon-price">R 1,500</span><span class="addon-applies">Online Stores</span></div>
+    </div>
+  </div>
+
+  <div class="note-box">
+    ★ HOSTING NOTE: Hosting is required for all packages. Clients who self-deploy on their own server may waive the hosting fee.
+    Shopify plans include hosting natively. QuadCorp recommends managed hosting for optimal performance, security, and support.
+  </div>
+</div>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
