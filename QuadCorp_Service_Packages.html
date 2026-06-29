@@ -131,6 +131,23 @@
     color: var(--dark);
   }
 
+  /* ── BADGE ── */
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--dark);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .badge-gold {
+    background: var(--gold);
+    color: var(--dark);
+  }
+
   /* ── MONTHLY TIERS ── */
   .tiers-grid {
     display: grid;
@@ -209,9 +226,6 @@
   .addon-price { font-weight: 800; color: var(--dark); font-size: 14px; }
   .addon-applies { font-size: 10px; color: var(--white); background: var(--mid); padding: 2px 7px; border-radius: 10px; }
 
-  /* ── MONTHLY EXTRAS TABLE ── */
-  .monthly-extras { margin-top: 24px; }
-
   /* ── NOTE BOX ── */
   .note-box {
     background: var(--mid);
@@ -244,6 +258,66 @@
   .ov-title { font-weight: 700; color: var(--mid); font-size: 14px; margin-bottom: 4px; }
   .ov-sub { font-size: 11px; color: #666; }
 
+  /* ── STORE PACKAGE CARDS ── */
+  .store-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .store-card {
+    background: var(--white);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+  }
+  .store-card-header {
+    padding: 20px 22px 16px;
+    text-align: center;
+  }
+  .store-card-header.pkg1 { background: var(--blue); }
+  .store-card-header.pkg2 { background: var(--green); }
+  .store-card-header h3 { color: #fff; font-size: 17px; margin-bottom: 4px; }
+  .store-card-header .store-price {
+    font-size: 26px;
+    font-weight: 900;
+    color: #fff;
+    margin: 8px 0 2px;
+  }
+  .store-card-header .store-price span { font-size: 13px; font-weight: 400; }
+  .store-card-header .store-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-top: 4px;
+  }
+  .store-card-body {
+    padding: 18px 20px;
+  }
+  .store-card-body .store-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #888;
+    margin: 12px 0 6px;
+  }
+  .store-card-body .store-section-label:first-child { margin-top: 0; }
+  .store-feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 5px 0;
+    border-bottom: 1px solid #eef0f8;
+    font-size: 12px;
+    color: #333;
+  }
+  .store-feature:last-child { border-bottom: none; }
+
   @media print {
     .tab-nav { display: none; }
     .tab-content { display: block !important; page-break-before: always; }
@@ -255,6 +329,7 @@
   @media (max-width: 768px) {
     .tiers-grid { grid-template-columns: 1fr; }
     .addon-grid { grid-template-columns: 1fr; }
+    .store-grid { grid-template-columns: 1fr; }
     .tab-content { padding: 16px; }
   }
 </style>
@@ -280,7 +355,7 @@
 <div id="overview" class="tab-content active">
   <h2 style="color:var(--mid);font-size:20px;margin-bottom:6px;">Welcome to QuadCorp</h2>
   <p style="color:#555;font-size:13px;max-width:720px;line-height:1.6;">
-    We build websites, online stores, mobile and web apps, CRM systems, and AI-powered solutions.
+    We build websites, online stores, mobile and web apps, and CRM systems.
     Every project starts with a one-time startup fee. Monthly packages keep everything running, secure, and growing.
   </p>
 
@@ -294,7 +369,7 @@
 
   <div class="note-box">
     ★ Hosting is required for all packages unless the client opts to self-deploy on their own server.<br>
-    ★ CMS and extra pages are optional add-ons — see the Add-Ons tab.<br>
+    ★ CMS is included from Pro website package onwards. Add-ons available for lower tiers — see the Add-Ons tab.<br>
     ★ Monthly packages can be added on top of any startup package at any time.<br>
     ★ All prices are in South African Rand (ZAR), excluding VAT. Final pricing confirmed after scope session.
   </div>
@@ -316,7 +391,7 @@
     </thead>
     <tbody>
       <tr>
-        <td class="pkg-name">One-Pager Website</td>
+        <td class="pkg-name">One Pager</td>
         <td class="desc">Single-page scrolling website, custom design, mobile responsive, contact form or WhatsApp button, basic SEO. Perfect for launching fast. Hosting required.</td>
         <td class="price"><span class="price-main">R 1,500</span></td>
         <td class="range">R 1,500 – R 3,000</td>
@@ -324,84 +399,112 @@
         <td class="center">3–5 days</td>
       </tr>
       <tr>
-        <td class="pkg-name">Micro Website (1–3 Pages)</td>
-        <td class="desc">Up to 3 pages (e.g. Home, About, Contact), custom design, mobile responsive, contact form, Google Maps, basic SEO. Ideal for small businesses &amp; startups. Hosting required.</td>
+        <td class="pkg-name">Starter</td>
+        <td class="desc">Up to 3 pages (e.g. Home, About, Contact), custom design, mobile responsive, contact form, Google Maps integration, basic SEO. Ideal for small businesses &amp; startups. Hosting required.</td>
         <td class="price"><span class="price-main">R 3,500</span></td>
-        <td class="range">R 2,500 – R 5,500</td>
-        <td class="center">1–3 pages</td>
+        <td class="range">R 2,500 – R 6,000</td>
+        <td class="center">3 pages</td>
         <td class="center">1–2 weeks</td>
       </tr>
       <tr>
-        <td class="pkg-name">Starter Website</td>
-        <td class="desc">5-page website, custom design, mobile responsive, contact form, basic SEO, Google Maps integration. Hosting required.</td>
-        <td class="price"><span class="price-main">R 8,500</span></td>
-        <td class="range">R 6,500 – R 12,000</td>
+        <td class="pkg-name">Pro <span class="badge">CMS Included</span></td>
+        <td class="desc">5-page website, custom design, mobile responsive, contact form, basic SEO, Google Maps integration. <strong>Includes CMS</strong> so you can update content yourself. <strong>Includes 1 free landing page.</strong> Hosting required.</td>
+        <td class="price"><span class="price-main">R 9,500</span></td>
+        <td class="range">R 7,500 – R 13,000</td>
         <td class="center">5 pages</td>
         <td class="center">2–3 weeks</td>
       </tr>
       <tr>
-        <td class="pkg-name">Business Website</td>
-        <td class="desc">10-page website, premium design, mobile responsive, advanced contact form, photo gallery, Google Maps, basic SEO. Hosting required.</td>
-        <td class="price"><span class="price-main">R 18,000</span></td>
-        <td class="range">R 15,000 – R 25,000</td>
+        <td class="pkg-name">Premium <span class="badge">CMS Included</span></td>
+        <td class="desc">10-page website, premium design, mobile responsive, advanced contact form, photo gallery, Google Maps, advanced SEO. <strong>Includes CMS</strong> + <strong>1 free landing page.</strong> Hosting required.</td>
+        <td class="price"><span class="price-main">R 20,000</span></td>
+        <td class="range">R 16,000 – R 28,000</td>
         <td class="center">10 pages</td>
         <td class="center">3–5 weeks</td>
       </tr>
       <tr>
-        <td class="pkg-name">Premium Website</td>
-        <td class="desc">15+ pages, fully custom design, CMS included, advanced SEO, animations, blog, multi-language option. Hosting required.</td>
-        <td class="price"><span class="price-main">R 35,000</span></td>
-        <td class="range">R 30,000 – R 55,000</td>
-        <td class="center">15+ pages</td>
-        <td class="center">6–10 weeks</td>
+        <td class="pkg-name">Enterprise <span class="badge badge-gold">CMS Included</span></td>
+        <td class="desc">Fully custom scope, bespoke design system, advanced functionality, animations, custom integrations. <strong>Includes CMS</strong> + <strong>1 free landing page.</strong> Final scope &amp; pricing confirmed after consultation. Hosting required.</td>
+        <td class="price"><span class="price-main">From R 38,000</span></td>
+        <td class="range">R 38,000 +</td>
+        <td class="center">Custom</td>
+        <td class="center">TBD</td>
       </tr>
     </tbody>
   </table>
-  <div class="note-box">All websites include mobile-responsive design, basic on-page SEO, and SSL setup. CMS is an optional add-on (R 5,000). Hosting is required unless client self-deploys.</div>
+  <div class="note-box">All websites include mobile-responsive design and SSL setup. CMS is included from Pro onwards — available as an add-on for One Pager &amp; Starter (R 5,000). Hosting is required unless client self-deploys.<br>★ Pro, Premium &amp; Enterprise each include <strong>1 free landing page</strong> as a bonus.</div>
 </div>
 
 <!-- ══════════ ONLINE STORES ══════════ -->
 <div id="stores" class="tab-content">
-  <div class="section-title">🛍️ Online Store Packages — One-Time Startup Fee</div>
-  <table>
-    <thead>
-      <tr>
-        <th>Package</th>
-        <th>What's Included</th>
-        <th class="right">Startup Price</th>
-        <th class="center">Price Range</th>
-        <th class="center">Scale</th>
-        <th class="center">Timeline</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td class="pkg-name">Shopify Starter Store</td>
-        <td class="desc">Shopify account setup, theme customisation, up to 50 products, payment gateway (PayFast/Stripe), basic SEO, mobile responsive. Hosting via Shopify.</td>
-        <td class="price"><span class="price-main">R 12,000</span></td>
-        <td class="range">R 9,000 – R 16,000</td>
-        <td class="center">50 products</td>
-        <td class="center">2–3 weeks</td>
-      </tr>
-      <tr>
-        <td class="pkg-name">Shopify Advanced Store</td>
-        <td class="desc">Custom Shopify theme, unlimited products, 3 premium apps, advanced SEO, abandoned cart recovery, analytics dashboard. Hosting via Shopify.</td>
-        <td class="price"><span class="price-main">R 22,000</span></td>
-        <td class="range">R 18,000 – R 30,000</td>
-        <td class="center">Unlimited</td>
-        <td class="center">4–6 weeks</td>
-      </tr>
-      <tr>
-        <td class="pkg-name">Custom E-Commerce Store</td>
-        <td class="desc">Fully bespoke store (non-Shopify), unlimited products, custom design, CMS admin panel, payment gateway, inventory management. Hosting required.</td>
-        <td class="price"><span class="price-main">R 55,000</span></td>
-        <td class="range">R 45,000 – R 80,000</td>
-        <td class="center">Unlimited</td>
-        <td class="center">8–14 weeks</td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="note-box">Shopify plans include hosting natively via Shopify's platform (Shopify subscription fee applies separately). Custom stores require hosting — see Add-Ons or Monthly Packages.</div>
+  <h2 style="color:var(--mid);font-size:18px;margin-bottom:4px;">🛍️ Online Store Packages — One-Time Startup Fee</h2>
+  <p style="color:#555;font-size:12px;margin-bottom:4px;">Both packages are Shopify-based. Choose based on how much account setup &amp; integration you need QuadCorp to handle.</p>
+
+  <div class="store-grid">
+
+    <!-- PACKAGE 1 -->
+    <div class="store-card">
+      <div class="store-card-header pkg1">
+        <h3>🛒 Shopify Store Setup</h3>
+        <div class="store-price">R 12,000 <span>startup</span></div>
+        <div class="store-tag">Client handles accounts — we build the store</div>
+      </div>
+      <div class="store-card-body">
+        <div class="store-section-label">What the Client Sets Up</div>
+        <div class="store-feature"><span class="tick">✓</span><span>Shopify account (client creates &amp; pays own subscription)</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Payment gateway account (PayFast, Peach, Yoco, etc.)</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Courier / fulfilment account (Bob Go, The Courier Guy, etc.)</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Any third-party app accounts required</span></div>
+
+        <div class="store-section-label" style="margin-top:14px;">What QuadCorp Does</div>
+        <div class="store-feature"><span class="tick">✓</span><span>Full Shopify store design &amp; theme setup</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Connect &amp; configure client's payment gateway</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Connect &amp; configure courier / shipping integration</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Product catalogue setup (up to 50 products)</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Mobile responsive design, basic SEO</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Store handover &amp; training session</span></div>
+
+        <div style="margin-top:14px;padding-top:10px;border-top:2px solid #eef0f8;">
+          <div style="font-size:11px;color:#666;font-style:italic;">Best for clients who already have or can create their own service accounts. Hosting via Shopify's platform.</div>
+          <div style="margin-top:6px;font-size:12px;color:#555;"><strong>Price range:</strong> R 9,000 – R 18,000</div>
+          <div style="font-size:12px;color:#555;"><strong>Timeline:</strong> 2–3 weeks</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PACKAGE 2 -->
+    <div class="store-card">
+      <div class="store-card-header pkg2">
+        <h3>🚀 Shopify Full Service</h3>
+        <div class="store-price">R 22,000 <span>startup</span></div>
+        <div class="store-tag">We set up everything — accounts &amp; integrations</div>
+      </div>
+      <div class="store-card-body">
+        <div class="store-section-label">QuadCorp Handles Everything</div>
+        <div class="store-feature"><span class="tick">✓</span><span>Shopify account creation &amp; configuration</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Payment gateway account setup (PayFast, Peach, Yoco, etc.)</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Courier / fulfilment account setup &amp; integration</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Full Shopify store design &amp; custom theme</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Product catalogue setup (unlimited products)</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Advanced SEO setup, analytics dashboard</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Abandoned cart &amp; email automation</span></div>
+
+        <div class="store-section-label" style="margin-top:14px;">Third-Party API Integrations</div>
+        <div class="store-feature"><span class="tick">✓</span><span>Can integrate external APIs (ERPs, booking systems, loyalty apps, etc.)</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Custom app or webhook connections as needed</span></div>
+        <div class="store-feature"><span class="tick">✓</span><span>Full handover, documentation &amp; training session</span></div>
+
+        <div style="margin-top:14px;padding-top:10px;border-top:2px solid #eef0f8;">
+          <div style="font-size:11px;color:#666;font-style:italic;">Best for clients who want a complete done-for-you solution. Hosting via Shopify's platform.</div>
+          <div style="margin-top:6px;font-size:12px;color:#555;"><strong>Price range:</strong> R 18,000 – R 35,000</div>
+          <div style="font-size:12px;color:#555;"><strong>Timeline:</strong> 4–7 weeks</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note-box">Shopify plans include hosting natively via Shopify's platform — the client's Shopify subscription fee applies separately. Complex third-party API integrations in Package 2 may affect pricing depending on scope. A free scoping call is recommended.</div>
 </div>
 
 <!-- ══════════ APPS ══════════ -->
@@ -429,14 +532,14 @@
       </tr>
       <tr>
         <td class="pkg-name">Web App — Advanced</td>
-        <td class="desc">Complex business logic, third-party API integrations, advanced admin dashboard, reporting & analytics. Hosting required.</td>
+        <td class="desc">Complex business logic, third-party API integrations, advanced admin dashboard, reporting &amp; analytics. Hosting required.</td>
         <td class="price"><span class="price-main">R 60,000</span></td>
         <td class="range">R 50,000 – R 90,000</td>
         <td class="center">Web</td>
         <td class="center">8–14 weeks</td>
       </tr>
       <tr>
-        <td class="pkg-name">Mobile App (iOS & Android)</td>
+        <td class="pkg-name">Mobile App (iOS &amp; Android)</td>
         <td class="desc">Cross-platform mobile app (React Native), core features, push notifications, admin panel, app store submission. Hosting required.</td>
         <td class="price"><span class="price-main">R 80,000</span></td>
         <td class="range">R 65,000 – R 120,000</td>
@@ -465,7 +568,7 @@
     <tbody>
       <tr>
         <td class="pkg-name">GHL Starter</td>
-        <td class="desc">GHL account setup, 3 sales pipelines, basic email & SMS automations, contact management, calendar booking, reporting dashboard.</td>
+        <td class="desc">GHL account setup, 3 sales pipelines, basic email &amp; SMS automations, contact management, calendar booking, reporting dashboard.</td>
         <td class="price"><span class="price-main">R 8,000</span></td>
         <td class="range">R 6,000 – R 12,000</td>
         <td class="center">Small team</td>
@@ -473,7 +576,7 @@
       </tr>
       <tr>
         <td class="pkg-name">GHL Business</td>
-        <td class="desc">Full GHL setup, unlimited pipelines, advanced workflows & automations, CRM integrations, lead capture forms, custom reporting, team user setup.</td>
+        <td class="desc">Full GHL setup, unlimited pipelines, advanced workflows &amp; automations, CRM integrations, lead capture forms, custom reporting, team user setup.</td>
         <td class="price"><span class="price-main">R 18,000</span></td>
         <td class="range">R 15,000 – R 28,000</td>
         <td class="center">Growing biz</td>
@@ -584,29 +687,6 @@
       </div>
     </div>
   </div>
-
-  <div class="monthly-extras">
-    <div class="section-title" style="margin-top:32px;">🔧 Additional Monthly Options (per service)</div>
-    <table>
-      <thead>
-        <tr>
-          <th>Service</th>
-          <th>Option</th>
-          <th class="right">Monthly Price</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>All Services</td><td>Hosting Only (no support)</td><td class="price">R 300</td><td class="desc">Shared hosting, 1 website, no support included</td></tr>
-        <tr><td>All Services</td><td>Premium Hosting (VPS)</td><td class="price">R 799</td><td class="desc">Faster resources, ideal for stores &amp; apps</td></tr>
-        <tr><td>All Services</td><td>Extra Support Hours (per hour)</td><td class="price">R 450</td><td class="desc">Billed in 1-hr blocks, beyond your monthly allocation</td></tr>
-        <tr><td>Websites / Stores</td><td>SEO Monitoring &amp; Reporting</td><td class="price">R 1,500</td><td class="desc">Monthly rankings report + optimisation tweaks</td></tr>
-        <tr><td>Online Stores</td><td>E-Commerce Management</td><td class="price">R 2,500</td><td class="desc">Product updates, promotions, order management</td></tr>
-        <tr><td>CRM / GHL</td><td>GHL Platform Subscription (via QuadCorp)</td><td class="price">R 1,200</td><td class="desc">GoHighLevel SaaS fee billed through QuadCorp</td></tr>
-        <tr><td>CRM / GHL</td><td>GHL Automation Maintenance</td><td class="price">R 1,800</td><td class="desc">Keep automations running, updates &amp; tweaks</td></tr>
-      </tbody>
-    </table>
-  </div>
 </div>
 
 <!-- ══════════ ADD-ONS ══════════ -->
@@ -617,18 +697,13 @@
   <div class="addon-grid">
     <div class="addon-card">
       <div class="addon-name">CMS Integration</div>
-      <div class="addon-desc">Add a content management system so you can update text, images and pages yourself without a developer.</div>
-      <div class="addon-footer"><span class="addon-price">R 5,000</span><span class="addon-applies">Websites &amp; Stores</span></div>
+      <div class="addon-desc">Add a content management system so you can update text, images and pages yourself without a developer. Included from Pro onwards.</div>
+      <div class="addon-footer"><span class="addon-price">R 5,000</span><span class="addon-applies">One Pager &amp; Starter</span></div>
     </div>
     <div class="addon-card">
       <div class="addon-name">Extra Page (per page)</div>
       <div class="addon-desc">Additional designed &amp; developed page beyond what's included in your package.</div>
       <div class="addon-footer"><span class="addon-price">R 1,200</span><span class="addon-applies">Websites</span></div>
-    </div>
-    <div class="addon-card">
-      <div class="addon-name">Blog / News Module</div>
-      <div class="addon-desc">Full blog setup with categories, tags, search and RSS feed.</div>
-      <div class="addon-footer"><span class="addon-price">R 3,500</span><span class="addon-applies">Websites</span></div>
     </div>
     <div class="addon-card">
       <div class="addon-name">Hosting Setup &amp; Configuration</div>
@@ -641,54 +716,14 @@
       <div class="addon-footer"><span class="addon-price">R 3,500</span><span class="addon-applies">All Services</span></div>
     </div>
     <div class="addon-card">
-      <div class="addon-name">Brand Identity Pack</div>
-      <div class="addon-desc">Logo + colour palette + typography guide + brand usage document.</div>
-      <div class="addon-footer"><span class="addon-price">R 7,500</span><span class="addon-applies">All Services</span></div>
-    </div>
-    <div class="addon-card">
-      <div class="addon-name">Full SEO Audit &amp; Setup</div>
-      <div class="addon-desc">Technical SEO audit, on-page optimisation, sitemap, schema markup, Google Search Console setup.</div>
+      <div class="addon-name">Full Audit</div>
+      <div class="addon-desc">Technical audit, on-page optimisation, sitemap, schema markup, Google Search Console setup and performance review.</div>
       <div class="addon-footer"><span class="addon-price">R 4,500</span><span class="addon-applies">Websites &amp; Stores</span></div>
     </div>
     <div class="addon-card">
-      <div class="addon-name">Google Analytics 4 + GTM Setup</div>
-      <div class="addon-desc">Full GA4 + Google Tag Manager setup with event tracking and conversion goals.</div>
-      <div class="addon-footer"><span class="addon-price">R 2,500</span><span class="addon-applies">Sites, Stores, Apps</span></div>
-    </div>
-    <div class="addon-card">
       <div class="addon-name">Payment Gateway Integration</div>
-      <div class="addon-desc">PayFast, Peach Payments, Stripe or PayPal integration.</div>
+      <div class="addon-desc">PayFast, Peach Payments, Yoco, Stripe or PayPal integration into your website or app.</div>
       <div class="addon-footer"><span class="addon-price">R 3,000</span><span class="addon-applies">Websites &amp; Apps</span></div>
-    </div>
-    <div class="addon-card">
-      <div class="addon-name">WhatsApp Chat Widget</div>
-      <div class="addon-desc">WhatsApp Business chat button embedded on your website.</div>
-      <div class="addon-footer"><span class="addon-price">R 800</span><span class="addon-applies">Websites &amp; Stores</span></div>
-    </div>
-    <div class="addon-card">
-      <div class="addon-name">Live Chat Widget Setup</div>
-      <div class="addon-desc">Setup of a live chat tool (Intercom, Crisp, Tidio etc.) on your site.</div>
-      <div class="addon-footer"><span class="addon-price">R 1,200</span><span class="addon-applies">Websites &amp; Stores</span></div>
-    </div>
-    <div class="addon-card">
-      <div class="addon-name">Multi-Language Setup (per language)</div>
-      <div class="addon-desc">Add an additional language with translation integration (e.g. Afrikaans, Zulu, French).</div>
-      <div class="addon-footer"><span class="addon-price">R 4,000</span><span class="addon-applies">Websites</span></div>
-    </div>
-    <div class="addon-card">
-      <div class="addon-name">Custom GHL Workflow / Automation</div>
-      <div class="addon-desc">Design and build one complex automation or workflow in GoHighLevel.</div>
-      <div class="addon-footer"><span class="addon-price">R 3,500</span><span class="addon-applies">CRM / GHL</span></div>
-    </div>
-    <div class="addon-card">
-      <div class="addon-name">AI Chatbot Add-On</div>
-      <div class="addon-desc">Claude-powered AI chatbot for your website or app — answers FAQs, captures leads, qualifies prospects.</div>
-      <div class="addon-footer"><span class="addon-price">R 8,000</span><span class="addon-applies">Websites &amp; Apps</span></div>
-    </div>
-    <div class="addon-card">
-      <div class="addon-name">Third-Party API Integration</div>
-      <div class="addon-desc">Connect your site/app to an external API (booking systems, ERPs, accounting tools, etc.).</div>
-      <div class="addon-footer"><span class="addon-price">R 5,000</span><span class="addon-applies">All Services</span></div>
     </div>
     <div class="addon-card">
       <div class="addon-name">E-Commerce Product Upload (per 50 products)</div>
